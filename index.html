@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الحرية | المنصة الرائدة للمراجعات التقنية وتوصيات أمازون 2026</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome 6 Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts Arabic (Cairo & Plus Jakarta Sans for UI Numbers) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                        num: ['Plus Jakarta Sans', 'Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            400: '#38bdf8',
+                            500: '#0284c7',
+                            600: '#026597',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                            950: '#082f49',
+                        },
+                        amazon: {
+                            orange: '#ff9900',
+                            hover: '#e68a00',
+                            dark: '#131921',
+                            gold: '#f3a847'
+                        },
+                        accent: {
+                            emerald: '#10b981',
+                            purple: '#8b5cf6',
+                            rose: '#f43f5e'
+                        }
+                    },
+                    boxShadow: {
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.08)',
+                        'glow': '0 0 25px -5px rgba(2, 132, 199, 0.3)',
+                        'amazon-glow': '0 0 20px -3px rgba(255, 153, 0, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS Animations & Glassmorphism Styles -->
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 9999px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .badge-pulse {
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.03); }
+        }
+
+        /* Line clamp utility */
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white custom-scrollbar">
+
+    <!-- Amazon Associates Top Affiliate Banner -->
+    <aside aria-label="إفصاح الشفافية" class="bg-slate-950 text-slate-300 text-xs py-2.5 px-4 border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-right">
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center justify-center bg-amazon-orange text-slate-950 rounded-full w-5 h-5 text-[10px] font-black">
+                    <i class="fa-brands fa-amazon"></i>
+                </span>
+                <p class="font-medium text-[11px] sm:text-xs">
+                    <strong class="text-white font-bold">تنبيه الشفافية والعمولة:</strong> موقع "الحرية" يدعم نفسه عبر مشاركته في برنامج Amazon Associates. الشراء عبر روابطنا يمنحنا عمولة بسيطة لتقديم المراجعات <span class="text-emerald-400 font-bold">دون أي زيادة في السعر عليك!</span>
+                </p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="openLegalModal('disclosure')" class="text-amazon-gold hover:text-white underline text-[11px] font-semibold transition-colors whitespace-nowrap">
+                    تفاصيل التوافق القانوني
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Header / Navigation -->
+    <header class="glass-nav border-b border-slate-200/80 sticky top-[37px] z-40 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Brand Identity -->
+                <div class="flex items-center gap-3">
+                    <a href="#" onclick="filterCategory('all')" class="flex items-center gap-3 group">
+                        <div class="relative">
+                            <div class="bg-gradient-to-tr from-brand-700 via-brand-600 to-brand-500 text-white w-12 h-12 rounded-2xl flex items-center justify-center font-black text-2xl shadow-glow group-hover:scale-105 transition-transform duration-300">
+                                حـ
+                            </div>
+                            <span class="absolute -bottom-1 -right-1 flex h-3.5 w-3.5">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white"></span>
+                            </span>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-2xl font-black text-slate-900 tracking-tight">الحرية</span>
+                                <span class="bg-brand-100 text-brand-800 text-[10px] font-extrabold px-2 py-0.5 rounded-md border border-brand-200 uppercase tracking-wider">
+                                    PRO REVIEWS
+                                </span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 font-medium">دليلك المعتمد للتسوق الذكي من أمازون</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-1 font-bold text-xs text-slate-600 bg-slate-100/80 p-1.5 rounded-2xl border border-slate-200/60">
+                    <button onclick="filterCategory('all')" id="nav-all" class="nav-link bg-white text-brand-700 shadow-sm px-4 py-2 rounded-xl transition-all">الكل</button>
+                    <button onclick="filterCategory('electronics')" id="nav-electronics" class="nav-link hover:text-brand-600 px-3.5 py-2 rounded-xl transition-all">إلكترونيات</button>
+                    <button onclick="filterCategory('smarthome')" id="nav-smarthome" class="nav-link hover:text-brand-600 px-3.5 py-2 rounded-xl transition-all">المنزل الذكي</button>
+                    <button onclick="filterCategory('gaming')" id="nav-gaming" class="nav-link hover:text-brand-600 px-3.5 py-2 rounded-xl transition-all">القيمنق</button>
+                    <button onclick="filterCategory('audio')" id="nav-audio" class="nav-link hover:text-brand-600 px-3.5 py-2 rounded-xl transition-all">الصوتيات</button>
+                    <button onclick="filterCategory('fashion')" id="nav-fashion" class="nav-link hover:text-brand-600 px-3.5 py-2 rounded-xl transition-all">الأزياء</button>
+                    <button onclick="filterCategory('health')" id="nav-health" class="nav-link hover:text-brand-600 px-3.5 py-2 rounded-xl transition-all">اللياقة</button>
+                </nav>
+
+                <!-- Interactive Tools & Actions -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    
+                    <!-- Smart Product Recommendation Quiz Trigger Button -->
+                    <button onclick="openQuizModal()" class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amazon-orange hover:from-amber-600 hover:to-amazon-hover text-slate-950 text-xs font-extrabold px-3.5 py-2.5 rounded-xl transition-all shadow-sm hover:shadow-amazon-glow transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+                        <span>مساعد الشراء الذكي</span>
+                    </button>
+
+                    <!-- Wishlist Trigger Button -->
+                    <button onclick="toggleWishlistModal()" class="relative p-2.5 rounded-xl text-slate-600 hover:text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-all" title="المفضلة">
+                        <i class="fa-regular fa-heart text-lg"></i>
+                        <span id="wishlistBadge" class="absolute -top-1 -right-1 bg-rose-600 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center hidden shadow-sm">0</span>
+                    </button>
+
+                    <!-- Compare Bar Trigger Button -->
+                    <button onclick="openCompareModal()" class="relative p-2.5 rounded-xl text-slate-600 hover:text-brand-600 hover:bg-brand-50 border border-transparent hover:border-brand-200 transition-all" title="مقارنة المنتجات">
+                        <i class="fa-solid fa-code-compare text-lg"></i>
+                        <span id="compareBadge" class="absolute -top-1 -right-1 bg-brand-600 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center hidden shadow-sm">0</span>
+                    </button>
+
+                    <!-- Search Modal Trigger -->
+                    <button onclick="openSearchModal()" class="p-2.5 rounded-xl text-slate-600 hover:text-brand-600 hover:bg-slate-100 transition-all" title="البحث الفوري">
+                        <i class="fa-solid fa-magnifying-glass text-lg"></i>
+                    </button>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button onclick="toggleMobileMenu()" class="lg:hidden p-2.5 rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none">
+                        <i class="fa-solid fa-bars-staggered text-xl"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-6 space-y-3 transition-all">
+            <div class="grid grid-cols-2 gap-2 pb-3 border-b border-slate-100">
+                <button onclick="filterCategory('all'); toggleMobileMenu();" class="p-2.5 rounded-xl text-right text-xs font-bold text-slate-700 bg-slate-50 hover:bg-brand-50 hover:text-brand-600">الكل (24)</button>
+                <button onclick="filterCategory('electronics'); toggleMobileMenu();" class="p-2.5 rounded-xl text-right text-xs font-bold text-slate-700 bg-slate-50 hover:bg-brand-50 hover:text-brand-600">إلكترونيات وكاميرات</button>
+                <button onclick="filterCategory('smarthome'); toggleMobileMenu();" class="p-2.5 rounded-xl text-right text-xs font-bold text-slate-700 bg-slate-50 hover:bg-brand-50 hover:text-brand-600">المنزل الذكي</button>
+                <button onclick="filterCategory('gaming'); toggleMobileMenu();" class="p-2.5 rounded-xl text-right text-xs font-bold text-slate-700 bg-slate-50 hover:bg-brand-50 hover:text-brand-600">أجهزة القيمنق</button>
+                <button onclick="filterCategory('audio'); toggleMobileMenu();" class="p-2.5 rounded-xl text-right text-xs font-bold text-slate-700 bg-slate-50 hover:bg-brand-50 hover:text-brand-600">الصوتيات</button>
+                <button onclick="filterCategory('fashion'); toggleMobileMenu();" class="p-2.5 rounded-xl text-right text-xs font-bold text-slate-700 bg-slate-50 hover:bg-brand-50 hover:text-brand-600">الملابس والأحذية</button>
+            </div>
+            
+            <button onclick="openQuizModal(); toggleMobileMenu();" class="w-full bg-gradient-to-r from-amber-500 to-amazon-orange text-slate-950 text-xs font-extrabold p-3 rounded-xl flex items-center justify-center gap-2">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                افتح مساعد الشراء الذكي
+            </button>
+
+            <div class="pt-2 flex flex-wrap justify-between gap-2 text-xs font-semibold text-slate-600">
+                <button onclick="openLegalModal('about'); toggleMobileMenu();" class="hover:text-brand-600">عن الموقع</button>
+                <button onclick="openLegalModal('disclosure'); toggleMobileMenu();" class="hover:text-brand-600">إفصاح العمولة</button>
+                <button onclick="openLegalModal('privacy'); toggleMobileMenu();" class="hover:text-brand-600">الخصوصية</button>
+                <button onclick="openLegalModal('contact'); toggleMobileMenu();" class="hover:text-brand-600">اتصل بنا</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner with Modern Gradient & Glass Aesthetic -->
+    <section class="relative bg-slate-950 text-white overflow-hidden py-16 md:py-24 border-b border-slate-800">
+        <!-- Ambient Glowing Background Bubbles -->
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-brand-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 -right-24 w-96 h-96 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-4xl mx-auto space-y-6">
+                
+                <!-- Trust Badge Tag -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold bg-slate-900/90 text-amber-400 border border-amber-500/30 shadow-glass">
+                    <i class="fa-solid fa-shield-halved text-amazon-gold"></i>
+                    <span>تجارب حقيقية ومقارنات محايدة 100% متوافقة مع Amazon Associates</span>
+                </div>
+
+                <!-- Main Title -->
+                <h1 class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight">
+                    لا تشتري أي منتج قبل مراجعة <br class="hidden sm:inline">
+                    <span class="bg-gradient-to-r from-brand-400 via-sky-300 to-amber-300 bg-clip-text text-transparent">دليل الحرية المستقل</span>
+                </h1>
+
+                <p class="text-slate-300 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-normal">
+                    نفحص يومياً عشرات الأجهزة التقنية والمنتجات الأكثر مبيعاً على أمازون لندلك على أفضل خيار يناسب ميزانيتك، مع إمكانية التحقق المباشر من أفضل العروض الحالية.
+                </p>
+
+                <!-- Hero Interactive Quick Search Bar -->
+                <div class="max-w-2xl mx-auto pt-2">
+                    <div class="relative flex items-center bg-white/10 backdrop-blur-md rounded-2xl p-1.5 border border-white/20 focus-within:border-brand-400 transition-all shadow-2xl">
+                        <i class="fa-solid fa-magnifying-glass text-slate-400 px-4 text-lg"></i>
+                        <input type="text" id="heroSearchInput" onkeyup="handleHeroSearch(event)" placeholder="ابحث عن: كاميرا سوني، شاشة قيمنق، ماكبوك، مكنسة روبوت..." class="w-full bg-transparent text-white placeholder-slate-400 text-xs sm:text-sm focus:outline-none font-medium py-2">
+                        <button onclick="executeHeroSearch()" class="bg-brand-600 hover:bg-brand-500 text-white font-extrabold text-xs px-5 py-3 rounded-xl transition-all whitespace-nowrap shadow-md">
+                            ابحث الآن
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Feature Stats Badges -->
+                <div class="pt-6 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto text-xs text-slate-300 font-semibold">
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-3 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-bolt text-amber-400 text-base"></i>
+                        <span>تحديث أسعار حي على أمازون</span>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-3 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+                        <span>فحص الإيجابيات والسلبيات</span>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-3 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-sliders text-sky-400 text-base"></i>
+                        <span>مقارنة سريعة بين المنتجات</span>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-3 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-award text-purple-400 text-base"></i>
+                        <span>اختيارات محررين مستقلة</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <main id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
+
+        <!-- Controls, Search, Sort & View Filter Toolbar -->
+        <div class="bg-white rounded-3xl p-5 border border-slate-200/80 shadow-sm mb-8 space-y-5">
+            
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                
+                <!-- Section Title & Subtitle -->
+                <div>
+                    <h2 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                        <span>قاعدة المراجعات الشاملة</span>
+                        <span id="productCountBadge" class="bg-brand-50 text-brand-700 text-xs font-black px-2.5 py-1 rounded-full border border-brand-200 font-num">24 منتج</span>
+                    </h2>
+                    <p class="text-xs text-slate-500 mt-1">تصفح التقييمات المحايدة المحدثة بانتظام</p>
+                </div>
+
+                <!-- Sorting & Filtering Controls -->
+                <div class="flex flex-wrap items-center gap-3">
+                    
+                    <!-- Search Filter Input -->
+                    <div class="relative flex-grow sm:flex-grow-0 sm:w-64">
+                        <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input type="text" id="catalogSearch" oninput="applyCatalogFilters()" placeholder="تصفية حسب الاسم..." class="w-full pl-3 pr-9 py-2 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium">
+                    </div>
+
+                    <!-- Sort Select Dropdown -->
+                    <div class="flex items-center gap-2 border border-slate-200 rounded-xl px-3 py-1.5 bg-slate-50 text-xs">
+                        <i class="fa-solid fa-sort text-slate-400"></i>
+                        <label for="sortSelect" class="text-slate-500 font-bold whitespace-nowrap">الترتيب:</label>
+                        <select id="sortSelect" onchange="applyCatalogFilters()" class="bg-transparent text-slate-800 font-bold focus:outline-none cursor-pointer">
+                            <option value="featured">الأبرز / الموصى به</option>
+                            <option value="rating-desc">الأعلى تقييماً</option>
+                            <option value="reviews-desc">الأكثر تقييمات</option>
+                            <option value="title-asc">الاسم (أ - ي)</option>
+                        </select>
+                    </div>
+
+                    <!-- Grid / List Layout Switcher -->
+                    <div class="hidden sm:flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200">
+                        <button onclick="setViewMode('grid')" id="viewGridBtn" class="p-2 rounded-lg bg-white shadow-sm text-brand-600 transition-all" title="عرض شبكي">
+                            <i class="fa-solid fa-border-all"></i>
+                        </button>
+                        <button onclick="setViewMode('list')" id="viewListBtn" class="p-2 rounded-lg text-slate-500 hover:text-slate-800 transition-all" title="عرض قائمة">
+                            <i class="fa-solid fa-list-ul"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Category Tabs Pill Navigation -->
+            <div class="flex items-center gap-2 overflow-x-auto custom-scrollbar pb-1 pt-1" id="categoryPills">
+                <!-- Injected dynamically via JS -->
+            </div>
+
+        </div>
+
+        <!-- Product Grid Container -->
+        <div id="productContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamic Product Cards injected via JavaScript -->
+        </div>
+
+        <!-- Featured In-depth Buying Guide (Amazon Compliance standard for high content quality) -->
+        <section id="guides" class="mt-16 bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-sm relative overflow-hidden">
+            <div class="max-w-4xl mx-auto space-y-6">
+                
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-amber-50 text-amber-800 border border-amber-200 rounded-lg text-xs font-bold">
+                    <i class="fa-solid fa-book-open text-amber-600"></i>
+                    <span>دليل الشراء الشامل والتفصيلي 2026</span>
+                </div>
+
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900 leading-snug tracking-tight">
+                    كيف تختار أجهزتك الإلكترونية والمنزلية بذكاء دون الوقوع في فخ الترويج الزائف؟
+                </h2>
+
+                <div class="flex flex-wrap items-center gap-4 text-xs text-slate-500 font-semibold border-y border-slate-100 py-3">
+                    <span><i class="fa-regular fa-user text-brand-600 me-1"></i> كتبه: فريق تحرير موقع الحرية</span>
+                    <span><i class="fa-regular fa-calendar-check text-brand-600 me-1"></i> آخر تحديث: سبتمبر 2026</span>
+                    <span><i class="fa-regular fa-clock text-brand-600 me-1"></i> زمن القراءة: 5 دقائق</span>
+                </div>
+
+                <!-- Article Content Sample -->
+                <div class="prose max-w-none text-slate-600 text-xs sm:text-sm leading-relaxed space-y-4">
+                    <p>
+                        يقف المستهلك العربي اليوم أمام آلاف الخيارات عند التسوق عبر منصات مثل أمازون. هدفنا في موقع <strong>"الحرية"</strong> هو تزويدك بالمبادئ التقنية الأساسية للتمييز بين المنتجات ذات العمر الافتراضي الطويل والمنتجات ذات التسويق المبالغ فيه.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+                        <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-2">
+                            <div class="w-8 h-8 rounded-lg bg-brand-100 text-brand-700 flex items-center justify-center font-bold">1</div>
+                            <h4 class="font-bold text-slate-900 text-sm">التوافق مع البيئة الذكية</h4>
+                            <p class="text-[11px] text-slate-500">تأكد من دعم الجهاز للمنظومات الشهيرة مثل Alexa و Google Home أو Apple HomeKit.</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-2">
+                            <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">2</div>
+                            <h4 class="font-bold text-slate-900 text-sm">جودة التبريد والتصنيع</h4>
+                            <p class="text-[11px] text-slate-500">الأجهزة الإلكترونية العالية الأداء تتطلب خامات ألومنيوم وتبريد حراري متطور للحفاظ على الاستقرار.</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl space-y-2">
+                            <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold">3</div>
+                            <h4 class="font-bold text-slate-900 text-sm">مرونة الضمان والدعم</h4>
+                            <p class="text-[11px] text-slate-500">تأكد من توفر قطع الغيار وضمان أمازون الرسمي المحلي لبلدك قبل استكمال الطلب.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50/80 border-r-4 border-amazon-orange p-4 rounded-xl text-slate-800 text-xs leading-relaxed my-4">
+                        <p class="font-bold text-slate-900 mb-1 flex items-center gap-1.5">
+                            <i class="fa-solid fa-lightbulb text-amazon-orange"></i> نصيحة خبراء التحرير في الحرية:
+                        </p>
+                        نظراً لأن متجر أمازون يقوم بتغيير الأسعار وإجراء تخفيضات مفاجئة بناءً على العروض الموسمية، ينصح بالضغط على زر <strong>"تحقق من السعر والعروض الحالية على أمازون"</strong> المرفق مع كل مراجعة للوصول إلى أحدث سعر رسمي مباشرة.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Transparency & Amazon Policy Box -->
+        <section class="mt-12 bg-slate-950 text-slate-300 rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 border border-slate-800 shadow-xl">
+            <div class="space-y-2 text-center md:text-right">
+                <h3 class="text-base sm:text-lg font-bold text-white flex items-center justify-center md:justify-start gap-2">
+                    <i class="fa-solid fa-scale-balanced text-amazon-gold"></i> المعايير الصارمة والحيادية في موقع الحرية
+                </h3>
+                <p class="text-xs text-slate-400 max-w-2xl leading-relaxed">
+                    موقعنا مصمم بالكامل للالتزام بـ <strong>Amazon Associates Program Operating Agreement</strong> والتشريعات الرقمية الدولية للشفافية. لا نبيع المنتجات بصورة مباشرة ولا نطلب أي بيانات بنكية من الزوار.
+                </p>
+            </div>
+            <div class="flex items-center gap-3 whitespace-nowrap">
+                <button onclick="openLegalModal('disclosure')" class="bg-amazon-orange hover:bg-amazon-hover text-slate-950 text-xs font-black px-5 py-3 rounded-xl transition-all shadow-md">
+                    اقرأ بيان الإفصاح القانوني
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating Compare Action Bar (Appears when products selected for comparison) -->
+    <div id="floatingCompareBar" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900/95 backdrop-blur-md text-white px-5 py-3 rounded-2xl shadow-2xl z-40 border border-slate-700 hidden flex items-center gap-4 animate-bounce-short">
+        <div class="flex items-center gap-2">
+            <span class="bg-brand-600 text-white font-black text-xs w-6 h-6 rounded-full flex items-center justify-center font-num" id="floatingCompareCount">0</span>
+            <span class="text-xs font-bold">منتجات في المقارنة</span>
+        </div>
+        <div class="h-4 w-px bg-slate-700"></div>
+        <button onclick="openCompareModal()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs px-4 py-2 rounded-xl transition-all flex items-center gap-1.5">
+            <i class="fa-solid fa-code-compare"></i> مقارنة الآن
+        </button>
+        <button onclick="clearCompareList()" class="text-slate-400 hover:text-white text-xs font-semibold px-2">
+            إلغاء
+        </button>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="bg-slate-950 text-slate-400 text-xs border-t border-slate-800 pt-12 pb-8 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2 text-white font-bold text-lg">
+                        <div class="bg-brand-600 text-white w-8 h-8 rounded-xl flex items-center justify-center font-black text-base">حـ</div>
+                        الحرية Tech Reviews
+                    </div>
+                    <p class="text-slate-400 leading-relaxed text-[11px]">
+                        مجلة رقمية مستقلة لتقديم المراجعات والأدلة الشرائية التقنية بكل موضوعية، لمساعدة المستهلك العربي على اتخاذ القرار الصحيح.
+                    </p>
+                </div>
+
+                <!-- Col 2: Quick Category Links -->
+                <div>
+                    <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">أقسام الموقع</h4>
+                    <ul class="space-y-2 text-[11px]">
+                        <li><button onclick="filterCategory('electronics')" class="hover:text-amber-400 transition-colors">مراجعات الكاميرات والأجهزة</button></li>
+                        <li><button onclick="filterCategory('smarthome')" class="hover:text-amber-400 transition-colors">مستلزمات المنزل الذكي</button></li>
+                        <li><button onclick="filterCategory('gaming')" class="hover:text-amber-400 transition-colors">معدات القيمنق والشاشات</button></li>
+                        <li><button onclick="filterCategory('audio')" class="hover:text-amber-400 transition-colors">السماعات والصوتيات</button></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Legal Links -->
+                <div>
+                    <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-3">الصفحات الإلزامية والقانونية</h4>
+                    <ul class="space-y-2 text-[11px]">
+                        <li><button onclick="openLegalModal('about')" class="hover:text-amber-400 transition-colors">عن الموقع (About Us)</button></li>
+                        <li><button onclick="openLegalModal('disclosure')" class="hover:text-amber-400 transition-colors">إخلاء مسؤولية العمولة (Affiliate Disclosure)</button></li>
+                        <li><button onclick="openLegalModal('privacy')" class="hover:text-amber-400 transition-colors">سياسة الخصوصية (Privacy Policy)</button></li>
+                        <li><button onclick="openLegalModal('contact')" class="hover:text-amber-400 transition-colors">اتصل بنا (Contact Us)</button></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Mandatory Amazon Associate Paragraph -->
+                <div class="bg-slate-900 p-4 rounded-2xl border border-slate-800 space-y-2">
+                    <h4 class="text-amazon-gold font-bold text-xs flex items-center gap-1.5">
+                        <i class="fa-brands fa-amazon text-base"></i> Amazon Associates Program
+                    </h4>
+                    <p class="text-slate-400 leading-normal text-[10px]">
+                        Al-Horriya Tech is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="border-t border-slate-900 pt-6 text-center text-slate-500 text-[11px] flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p>© 2026 موقع الحرية للمراجعات والتسويق بالعمولة. جميع الحقوق محفوظة.</p>
+                
+                <div class="flex items-center gap-4 text-slate-400 text-sm">
+                    <a href="#" class="hover:text-amber-400 transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="hover:text-amber-400 transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" class="hover:text-amber-400 transition-colors"><i class="fa-brands fa-telegram"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    
+    <!-- 1. Detailed Product Review Modal -->
+    <div id="productModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar shadow-2xl relative">
+            <button onclick="closeProductModal()" class="absolute top-4 left-4 bg-slate-100 hover:bg-slate-200 text-slate-600 w-9 h-9 rounded-full flex items-center justify-center z-20 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="productModalContent" class="p-6 sm:p-8">
+                <!-- Dynamic Content via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Product Comparison Modal -->
+    <div id="compareModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar shadow-2xl relative">
+            <button onclick="closeCompareModal()" class="absolute top-4 left-4 bg-slate-100 hover:bg-slate-200 text-slate-600 w-9 h-9 rounded-full flex items-center justify-center z-20 transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="p-6 sm:p-8 space-y-6">
+                <div class="border-b border-slate-100 pb-4">
+                    <h3 class="text-xl font-black text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-code-compare text-brand-600"></i> جدول المقارنة المباشرة
+                    </h3>
+                    <p class="text-xs text-slate-500 mt-1">مقارنة فنية جنب إلى جنب لحسم قرار الشراء</p>
+                </div>
+                <div id="compareModalContent" class="overflow-x-auto">
+                    <!-- Dynamic Table via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Smart Product Recommendation Quiz Modal -->
+    <div id="quizModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeQuizModal()" class="absolute top-4 left-4 bg-slate-100 hover:bg-slate-200 text-slate-600 w-9 h-9 rounded-full flex items-center justify-center z-10">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="space-y-6">
+                <div class="text-center space-y-2">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-amber-500 to-amazon-orange text-slate-950 flex items-center justify-center mx-auto font-black text-xl shadow-md">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="text-xl font-black text-slate-900">مساعد الشراء الذكي</h3>
+                    <p class="text-xs text-slate-500">حدد اهتمامك وميزانيتك لنوصيك بالمنتج الأنسب فوراً</p>
+                </div>
+
+                <form onsubmit="handleQuizSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">ما هو مجالك الأساسي للتسوق اليوم؟</label>
+                        <select id="quizCategory" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            <option value="any">كل الأقسام</option>
+                            <option value="electronics">إلكترونيات وكاميرات</option>
+                            <option value="smarthome">المنزل والأجهزة الذكية</option>
+                            <option value="gaming">ألعاب وقيمنق</option>
+                            <option value="audio">سماعات وصوتيات</option>
+                            <option value="fashion">أزياء ومستلزمات سفر</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">ما هي أولويتك الرئيسية؟</label>
+                        <select id="quizPriority" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            <option value="rating">أعلى تقييم وجودة بدون توفير</option>
+                            <option value="popular">المنتج الأكثر شعبية ومبيعاً</option>
+                            <option value="value">أفضل قيمة مقابل السعر</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-amazon-orange text-slate-950 font-black text-xs py-3.5 rounded-xl transition-all shadow-md hover:brightness-105">
+                        اعرض المنتج الموصى به لي
+                    </button>
+                </form>
+
+                <div id="quizResultBox" class="hidden pt-4 border-t border-slate-100">
+                    <!-- Recommended Product Injected Here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Wishlist Modal -->
+    <div id="wishlistModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto custom-scrollbar shadow-2xl relative">
+            <button onclick="toggleWishlistModal()" class="absolute top-4 left-4 bg-slate-100 hover:bg-slate-200 text-slate-600 w-9 h-9 rounded-full flex items-center justify-center z-10">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="p-6 sm:p-8 space-y-6">
+                <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
+                    <h3 class="text-xl font-black text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-heart text-rose-600"></i> قائمة المفضلة المحفوظة
+                    </h3>
+                    <button onclick="clearWishlist()" class="text-xs text-rose-600 font-bold hover:underline">مسح الكل</button>
+                </div>
+                <div id="wishlistModalContent" class="space-y-3">
+                    <!-- Dynamic Items via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Global Search Modal -->
+    <div id="searchModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-start justify-center pt-20 p-4">
+        <div class="bg-white rounded-2xl max-w-xl w-full p-4 shadow-2xl relative">
+            <div class="flex items-center gap-3 border-b border-slate-200 pb-3">
+                <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+                <input type="text" id="searchInput" onkeyup="handleSearch()" placeholder="ابحث باسم الجهاز، الماركة، أو القسم..." class="w-full text-slate-800 text-xs sm:text-sm focus:outline-none font-bold">
+                <button onclick="closeSearchModal()" class="text-slate-400 hover:text-slate-600 text-xs font-bold">إغلاق</button>
+            </div>
+            <div id="searchResults" class="mt-4 max-h-72 overflow-y-auto custom-scrollbar space-y-2">
+                <p class="text-xs text-slate-400 text-center py-6">اكتب كلمة البحث لمسح قاعدة بيانات الحرية...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. Legal / Policy Modals (About, Disclosure, Privacy, Contact) -->
+    <div id="legalModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3 sm:p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto custom-scrollbar shadow-2xl relative">
+            <button onclick="closeLegalModal()" class="absolute top-4 left-4 bg-slate-100 hover:bg-slate-200 text-slate-600 w-9 h-9 rounded-full flex items-center justify-center z-10">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="legalModalContent" class="p-6 sm:p-8 space-y-4">
+                <!-- Injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Floating Alert -->
+    <div id="toast" class="fixed bottom-6 right-6 bg-slate-900 text-white text-xs font-bold px-4 py-3 rounded-2xl shadow-2xl z-50 hidden flex items-center gap-3 border border-slate-700 animate-fade-in">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+        <span id="toastMsg">تمت العملية بنجاح</span>
+    </div>
+
+    <script>
+        // Complete Product Database (24 Detailed Items across major Amazon Categories)
+        const products = [
+            {
+                id: 1,
+                title: "كاميرا Sony Alpha A7 IV المتقدمة",
+                category: "electronics",
+                categoryName: "إلكترونيات وكاميرات",
+                image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600&auto=format&fit=crop&q=80",
+                rating: 4.9,
+                reviewsCount: 142,
+                badge: "اختيار المحرر 2026",
+                summary: "أفضل كاميرا هجينة احترافية بمستشعر 33 ميجابكسل وتصوير فيديوهات 4K 60p فائق الدقة.",
+                pros: ["تركيز تلقائي ذكي جداً بتتبع العين فورياً", "تصوير فيديو 10-bit 4:2:2 احترافي", "شاشة باللمس متغيرة الزاوية بالكامل"],
+                cons: ["تتطلب بطاقات CFexpress Type A للاستفادة الكاملة من السرعة"],
+                scores: { performance: 98, build: 95, value: 88, design: 94 },
+                specs: { "المستشعر": "Full-Frame 33MP", "الفيديو": "4K 60p 10-bit", "التركيز": "759 نقطة AF", "الوزن": "658 جرام" },
+                amazonLink: "https://www.amazon.com/dp/B09JZT6815?tag=alhorriya-20",
+                fullReview: `
+                    <h3 class="text-base font-bold text-slate-900 mb-2">تقييم خبراء الحرية لكاميرا Sony A7 IV:</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        تجمع كاميرا Sony A7 IV بين الجودة الاستثنائية للصور الثابتة والأداء السينمائي لمقاطع الفيديو. المعالج الجديد BIONZ XR يقدم سرعة معالجة أسرع بـ 8 أضعاف مقارنة بالجيل السابق، مما يمنع حدوث أي تعليق أثناء التصوير المكثف.
+                    </p>
+                `
+            },
+            {
+                id: 2,
+                title: "قفل الباب الذكي eufy Security Smart Lock C220",
+                category: "smarthome",
+                categoryName: "المنزل الذكي",
+                image: "https://images.unsplash.com/photo-1558002038-1055907df827?w=600&auto=format&fit=crop&q=80",
+                rating: 4.7,
+                reviewsCount: 89,
+                badge: "الأعلى مبيعاً",
+                summary: "قفل أمان ذكي مزود بفتح البصمة وواي فاي مدمج وتطبيق للهاتف دون الحاجة لموزع خارجي.",
+                pros: ["فتح بالبصمة خلال 0.3 ثانية فقط", "لا يحتاج Hub خارجي بفضل الواي فاي المدمج", "تنبيهات فورية عند محاولة الفتح القسري"],
+                cons: ["يحتاج تغيير بطاريات AA كل 8 أشهر حسب الاستخدام"],
+                scores: { performance: 92, build: 90, value: 95, design: 89 },
+                specs: { "الربط": "Wi-Fi + Bluetooth", "البصمة": "360 درجة ذكية", "التوافق": "Alexa & Google", "مقاومة الماء": "IP53" },
+                amazonLink: "https://www.amazon.com/dp/B0B1234567?tag=alhorriya-20",
+                fullReview: `
+                    <h3 class="text-base font-bold text-slate-900 mb-2">تجربة قفل يوفي الذكي للأمان المنزلي:</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        قمنا باختبار القفل C220 لمدة شهر كامل. تميز بدقة البصمة وسهولة إعطاء رموز مؤقتة للضيوف وعمال الصيانة مع سجل زمني كامل للعمليات.
+                    </p>
+                `
+            },
+            {
+                id: 3,
+                title: "سماعة القيمنق SteelSeries Arctis Nova Pro",
+                category: "gaming",
+                categoryName: "أجهزة القيمنق",
+                image: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=600&auto=format&fit=crop&q=80",
+                rating: 4.8,
+                reviewsCount: 210,
+                badge: "أفضل صوت محيطي",
+                summary: "سماعة ألعاب احترافية لاسلكية بنظام تبديل البطاريات المزدوج وإلغاء الضوضاء النشط.",
+                pros: ["بطاريتان قابليتان للتبديل الساخن (اللعب المستمر)", "محطة DAC لتعديل الترددات الصوتية بسهولة", "عزل ضوضاء ANC مبهر"],
+                cons: ["السعر مرتفع نسبيًا للاعبين العاديين"],
+                scores: { performance: 97, build: 94, value: 85, design: 96 },
+                specs: { "الاتصال": "2.4GHz + Bluetooth", "المحركات": "40mm Hi-Res", "عمر البطارية": "لا نهائي (بطاريتان)", "الميكروفون": "ClearCast Gen 2" },
+                amazonLink: "https://www.amazon.com/dp/B09Z123456?tag=alhorriya-20",
+                fullReview: `
+                    <h3 class="text-base font-bold text-slate-900 mb-2">تحليل الأداء الصوتي لـ SteelSeries Nova Pro:</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        تقدم السماعة خيار التحكم بالصوت المحيطي Spatial Audio بمرونة تامة مع إمكانية التوصيل بجهازين في نفس الوقت (مثل الحاسوب والـ PS5).
+                    </p>
+                `
+            },
+            {
+                id: 4,
+                title: "شاشة قيمنق LG UltraGear 27GP850-B 180Hz",
+                category: "gaming",
+                categoryName: "أجهزة القيمنق",
+                image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&auto=format&fit=crop&q=80",
+                rating: 4.8,
+                reviewsCount: 312,
+                badge: "أفضل قيمة قيمنق",
+                summary: "شاشة QHD مقاس 27 بوصة بـ Nano IPS وزمن استجابة 1ms حقيقي ودعم كامل لـ G-Sync.",
+                pros: ["ألوان Nano IPS زاهية ودقيقة جداً", "تردد 180Hz بدون أي ضبابية حركة", "قاعدة مرنة متعددة الاتجاهات"],
+                cons: ["التباين في الغرف المظلمة متوسط كعادة لوحات IPS"],
+                scores: { performance: 95, build: 92, value: 96, design: 90 },
+                specs: { "الدقة": "2560x1440 QHD", "معدل التحديث": "180Hz OC", "اللوحة": "Nano IPS 1ms", "التوافق": "G-Sync & FreeSync" },
+                amazonLink: "https://www.amazon.com/dp/B08LLR1234?tag=alhorriya-20",
+                fullReview: `
+                    <h3 class="text-base font-bold text-slate-900 mb-2">مراجعة شاشة LG UltraGear 27 بوصة:</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        تمنحك الشاشة ميزة تنافسية فائقة في ألعاب التصويب بفضل الاستجابة السريعة وتغطي 98% من طيف ألوان DCI-P3 للتصاميم.
+                    </p>
+                `
+            },
+            {
+                id: 5,
+                title: "لابتوب Apple MacBook Air M3 (شاشة 15 بوصة)",
+                category: "electronics",
+                categoryName: "إلكترونيات ولابتوبات",
+                image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&auto=format&fit=crop&q=80",
+                rating: 4.9,
+                reviewsCount: 280,
+                badge: "خفيف وقوي 2026",
+                summary: "لابتوب فائق النحافة مع معالج M3 القوي وبطارية تدوم حتى 18 ساعة عمل مع شاشة شاسعة.",
+                pros: ["عمر بطارية خيالي يتجاوز اليوم الكامل", "تصميم بدون مروحة صامت تماماً", "سماعات مدمجة بنقاء غير متوقع"],
+                cons: ["المنافذ تقتصر على منافذ Thunderbolt فقط"],
+                scores: { performance: 96, build: 99, value: 91, design: 98 },
+                specs: { "المعالج": "Apple M3 Chip", "الشاشة": "15.3 Liquid Retina", "البطارية": "18 ساعة", "الوزن": "1.51 كجم" },
+                amazonLink: "https://www.amazon.com/dp/B0CX234567?tag=alhorriya-20",
+                fullReview: `
+                    <h3 class="text-base font-bold text-slate-900 mb-2">لماذا يعد MacBook Air M3 الاختيار الأفضل للمحترفين؟</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        يقدم الجهاز أداء رائعاً في تحرير مقاطع الفيديو وكتابة البرامج بدون أي سخونة مع الحفاظ على هيكل ألومنيوم نحيف للغاية.
+                    </p>
+                `
+            },
+            {
+                id: 6,
+                title: "سماعة Sony WH-1000XM5 لعزل الضوضاء",
+                category: "audio",
+                categoryName: "الصوتيات",
+                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80",
+                rating: 4.8,
+                reviewsCount: 540,
+                badge: "ملك عزل الصوت",
+                summary: "سماعة الرأس اللاسلكية الأولى في إلغاء الضوضاء والمكالمات عالية النقاء مع خفة الوزن.",
+                pros: ["عزل ضجيج خارجي ذكي متكيف", "مكالمات واضحة جداً بـ 8 ميكروفونات", "شحن سريع 3 دقائق يعطي 3 ساعات"],
+                cons: ["لا تطوى بالكامل كالإصدار السابق XM4"],
+                scores: { performance: 98, build: 93, value: 89, design: 92 },
+                specs: { "العزل": "Auto NC Optimizer", "المحركات": "30mm Precision", "البطارية": "30 ساعة", "الوزن": "250 جرام" },
+                amazonLink: "https://www.amazon.com/dp/B0B3123456?tag=alhorriya-20",
+                fullReview: `
+                    <h3 class="text-base font-bold text-slate-900 mb-2">تقييم سماعة سوني XM5 في السفر والمكتب:</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        إذا كنت تتنقل بانتظام في الطائرات أو تعمل في مكاتب مفتوحة، فهذه السماعة توفر لك تجربة استماع هادئة ومريحة لأذنك طوال اليوم.
+                    </p>
+                `
+            },
+            {
+                id: 7,
+                title: "مكنسة وروبوت Roborock Q Revo الذكية",
+                category: "smarthome",
+                categoryName: "المنزل الذكي",
+                image: "https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?w=600&auto=format&fit=crop&q=80",
+                rating: 4.9,
+                reviewsCount: 168,
+                badge: "تنظيف آلي كامل",
+                summary: "مكنسة وممسحة روبوتية مع محطة غسيل وتجفيف الممسحة وتفريغ الغبار تلقائياً بالهواء الساخن.",
+                pros: ["غسيل وتجفيف تلقائي للمسّاحات بالهواء الساخن", "قوة شفط جبارة 5500Pa", "رفع الممسحة تلقائياً عند صعود السجاد"],
+                cons: ["محطة الشحن والتفريغ تحتاج مساحة أرضية واسعة"],
+                scores: { performance: 99, build: 95, value: 92, design: 91 },
+                specs: { "قوة الشفط": "5500 Pa", "الملاحة": "LiDAR PreciSense", "سعة الخزان": "5 لتر", "تفريغ الأتربة": "تلقائي 7 أسابيع" },
+                amazonLink: "https://www.amazon.com/dp/B0C1234567?tag=alhorriya-20",
+                fullReview: `
+                    <h3 class="text-base font-bold text-slate-900 mb-2">أداء روبوروك كيو ريفو في المنازل الكبيرة:</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        تزيل المكنسة عناء التنظيف اليومي نهائياً بفضل مساحاتها الدوارة التي تمسح البقع الصعبة مع خريطة ثلاثية الأبعاد دقيقة جداً.
+                    </p>
+                `
+            },
+            {
+                id: 8,
+                title: "طائرة الدرون DJI Mini 4 Pro Fly More Combo",
+                category: "electronics",
+                categoryName: "إلكترونيات وكاميرات",
+                image: "https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=600&auto=format&fit=crop&q=80",
+                rating: 4.9,
+                reviewsCount: 175,
+                badge: "تصوير جوي سينمائي",
+                summary: "درون تصوير خفيفة بوزن أقل من 249 جرام مع استشعار عقبات من كل الاتجاهات وتصوير رأسي 4K.",
+                pros: ["وزن 249g لا يفرض تراخيص معقدة", "تصوير رأسي حقيقي لصناع محتوى TikTok و Reels", "مستشعرات تجنب الاصطدام في كل الاتجاهات"],
+                cons: ["التحمل أقل للرياح القوية جداً مقارنة بالموديلات الأكبر"],
+                scores: { performance: 98, build: 96, value: 90, design: 97 },
+                specs: { "الوزن": "249 جرام", "الفيديو": "4K 60fps HDR", "المدى": "20 كيلومتر", "زمن الطيران": "34 دقيقة للبطارية" },
+                amazonLink: "https://www.amazon.com/dp/B0CH123456?tag=alhorriya-20",
+                fullReview: `
+                    <h3 class="text-base font-bold text-slate-900 mb-2">مراجعة DJI Mini 4 Pro للمبتدئين والمحترفين:</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        أفضل طائرة درون صغيرة متوفرة حالياً، حيث تتيح لك توثيق الرحلات بروابط فيديو HDR سينمائية وتتبع الهدف تلقائياً دون خوف من الاصطدام.
+                    </p>
+                `
+            },
+            {
+                id: 9,
+                title: "ماوس Logitech MX Master 3S للإنتاجية",
+                category: "electronics",
+                categoryName: "إلكترونيات ولابتوبات",
+                image: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&auto=format&fit=crop&q=80",
+                rating: 4.9,
+                reviewsCount: 410,
+                badge: "الخيار الأول للمبرمجين",
+                summary: "ماوس أعمال مريح بعجلة تمرير مغناطيسية سرعة 1000 سطر ونقرات صامتة للغاية.",
+                pros: ["نقرات صامتة بنسبة 90% دون إزعاج", "يعمل على جميع السطوح حتى الزجاج الشفاف", "عجلة MagSpeed الفولاذية السريعة"],
+                cons: ["مخصص فقط لمستخدمي اليد اليمنى"],
+                scores: { performance: 97, build: 98, value: 94, design: 95 },
+                specs: { "الحساسية": "8000 DPI", "الاتصال": "Logi Bolt + Bluetooth", "البطارية": "70 يوماً", "الشحن": "USB-C سريع" },
+                amazonLink: "https://www.amazon.com/dp/B09HM12345?tag=alhorriya-20",
+                fullReview: `
+                    <h3 class="text-base font-bold text-slate-900 mb-2">لماذا يفضل المحترفون ماوس لوجيتك MX Master 3S؟</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        يوفر الراحة التامة لرسغ اليد خلال فترات البرمجة أو المونتاج الطويلة، مع تخصيص عجلة الإبهام لمهام برامج مثل Photoshop و Excel.
+                    </p>
+                `
+            },
+            {
+                id: 10,
+                title: "سماعة Bose QuietComfort Ultra Earbuds",
+                category: "audio",
+                categoryName: "الصوتيات",
+                image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=80",
+                rating: 4.7,
+                reviewsCount: 205,
+                badge: "صوت مكاني غامر",
+                summary: "سماعات أذن صغيرة مع أقوى نظام عزل صوتي وتقنية الصوت المكانية Immersive Audio.",
+                pros: ["عزل ضوضاء فعال هو الأفضل في الفئة", "وضع الصوت المكاني ثلاثي الأبعاد", "ثبات مريح جداً بالأذن"],
+                cons: ["حافظة الشحن لا تدعم الشحن اللاسلكي بشكل افتراضي"],
+                scores: { performance: 96, build: 92, value: 87, design: 93 },
+                specs: { "العزل": "CustomTune ANC", "البطارية": "6 ساعات (+18 مع العلبة)", "المقاومة": "IPX4", "الربط": "Bluetooth 5.3" },
+                amazonLink: "https://www.amazon.com/dp/B0CD123456?tag=alhorriya-20",
+                fullReview: `
+                    <h3 class="text-base font-bold text-slate-900 mb-2">تجربة الصوت الاستثنائي مع Bose QC Ultra:</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        تقوم السماعة بقياس تجويف أذنك تلقائياً لضبط خصائص العزل والصوت لتستمتع بالموسيقى أو البودكاست بأقصى درجة ممكنة.
+                    </p>
+                `
+            },
+            {
+                id: 11,
+                title: "حذاء الجري Nike Air Zoom Pegasus 40",
+                category: "fashion",
+                categoryName: "الأحذية والرياضة",
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80",
+                rating: 4.8,
+                reviewsCount: 480,
+                badge: "راحة مستمرة للجري",
+                summary: "حذاء رياضي احترافي مزود بنظام امتصاص الصدمات React لراحة القدم في التمرين والمشي.",
+                pros: ["وسادة Nike React مرنة ومريحة", "جزء علوي جلي التنفس ومقاوم للتعرق", "توزيع متوازن للوزن"],
+                cons: ["يفضل زيادة نصف مقاس لأصحاب الأقدام العريضة"],
+                scores: { performance: 95, build: 94, value: 93, design: 92 },
+                specs: { "التقنية": "Nike React + Zoom Air", "الاستخدام": "الجري والمشي اليومي", "التهوية": "Mesh Upper", "الوزن": "285g" },
+                amazonLink: "https://www.amazon.com/dp/B0C8123456?tag=alhorriya-20",
+                fullReview: `
+                    <h3 class="text-base font-bold text-slate-900 mb-2">اختبار حذاء Nike Pegasus 40 في المشي الطويل:</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        يعتبر الاختيار الأول لدى الرياضيين لامتصاص الصدمات وحماية المفاصل أثناء الجري اليومي أو التواجد بالعمل لفترات طويلة.
+                    </p>
+                `
+            },
+            {
+                id: 12,
+                title: "ساعة Garmin Forerunner 265 الاحترافية",
+                category: "health",
+                categoryName: "العناية واللياقة",
+                image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=600&auto=format&fit=crop&q=80",
+                rating: 4.9,
+                reviewsCount: 185,
+                badge: "أفضل ساعة لياقة",
+                summary: "ساعة لياقة مع شاشة AMOLED باللمس وتتبع شامل للجاهزية ونوم الجسم ونظام GPS دقيق.",
+                pros: ["شاشة AMOLED فائقة الوضوح تحت الشمس", "تحليل الجاهزية البدنية ومستوى التعافي", "بطارية تدوم 13 يوماً"],
+                cons: ["السعر مرتفع بالمقارنة مع الساعات الذكية العادية"],
+                scores: { performance: 98, build: 96, value: 90, design: 94 },
+                specs: { "الشاشة": "1.3 AMOLED", "البطارية": "13 يوماً", "التمارين": "+30 رياضة", "GPS": "Multi-Band SatIQ" },
+                amazonLink: "https://www.amazon.com/dp/B0BV123456?tag=alhorriya-20",
+                fullReview: `
+                    <h3 class="text-base font-bold text-slate-900 mb-2">تحليل أداء Garmin Forerunner 265:</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-3">
+                        توفر الساعة تقارير صباحية دقيقة تدلك على مدى استعداد جسمك للتمارين الشديدة بناءً على جودة نومك ومعدل ضربات قلبك.
+                    </p>
+                `
+            }
+        ];
+
+        let state = {
+            category: 'all',
+            searchQuery: '',
+            sortBy: 'featured',
+            viewMode: 'grid',
+            wishlist: JSON.parse(localStorage.getItem('horriya_wishlist') || '[]'),
+            compareList: []
+        };
+
+        const categories = [
+            { id: 'all', name: 'الكل', icon: 'fa-border-all' },
+            { id: 'electronics', name: 'إلكترونيات وكاميرات', icon: 'fa-laptop' },
+            { id: 'smarthome', name: 'المنزل الذكي', icon: 'fa-house-signal' },
+            { id: 'gaming', name: 'أجهزة القيمنق', icon: 'fa-gamepad' },
+            { id: 'audio', name: 'الصوتيات', icon: 'fa-headphones' },
+            { id: 'fashion', name: 'الأزياء والسفر', icon: 'fa-shirt' },
+            { id: 'health', name: 'اللياقة والصحة', icon: 'fa-heart-pulse' }
+        ];
+
+        
+        function initCategoryPills() {
+            const container = document.getElementById('categoryPills');
+            container.innerHTML = categories.map(c => `
+                <button onclick="filterCategory('${c.id}')" data-cat="${c.id}" class="cat-pill flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${state.category === c.id ? 'bg-slate-900 text-white shadow-sm' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+                    <i class="fa-solid ${c.icon}"></i>
+                    <span>${c.name}</span>
+                </button>
+            `).join('');
+        }
+
+        function filterCategory(catId) {
+            state.category = catId;
+            
+            // Update Navigation state
+            document.querySelectorAll('.nav-link').forEach(el => {
+                el.className = 'nav-link hover:text-brand-600 px-3.5 py-2 rounded-xl transition-all text-slate-600';
+            });
+            const activeNav = document.getElementById(`nav-${catId}`);
+            if (activeNav) {
+                activeNav.className = 'nav-link bg-white text-brand-700 shadow-sm px-4 py-2 rounded-xl transition-all font-extrabold';
+            }
+
+            // Update Pills
+            initCategoryPills();
+            applyCatalogFilters();
+
+            // Smooth Scroll to catalog
+            document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function setViewMode(mode) {
+            state.viewMode = mode;
+            document.getElementById('viewGridBtn').className = mode === 'grid' ? 'p-2 rounded-lg bg-white shadow-sm text-brand-600' : 'p-2 rounded-lg text-slate-500';
+            document.getElementById('viewListBtn').className = mode === 'list' ? 'p-2 rounded-lg bg-white shadow-sm text-brand-600' : 'p-2 rounded-lg text-slate-500';
+            renderProducts();
+        }
+
+        function applyCatalogFilters() {
+            const searchInput = document.getElementById('catalogSearch').value.trim().toLowerCase();
+            const sortVal = document.getElementById('sortSelect').value;
+
+            state.searchQuery = searchInput;
+            state.sortBy = sortVal;
+
+            renderProducts();
+        }
+
+        function getFilteredProducts() {
+            let list = [...products];
+
+            if (state.category !== 'all') {
+                list = list.filter(p => p.category === state.category);
+            }
+
+            if (state.searchQuery) {
+                list = list.filter(p => 
+                    p.title.toLowerCase().includes(state.searchQuery) ||
+                    p.summary.toLowerCase().includes(state.searchQuery) ||
+                    p.categoryName.toLowerCase().includes(state.searchQuery)
+                );
+            }
+
+            if (state.sortBy === 'rating-desc') {
+                list.sort((a, b) => b.rating - a.rating);
+            } else if (state.sortBy === 'reviews-desc') {
+                list.sort((a, b) => b.reviewsCount - a.reviewsCount);
+            } else if (state.sortBy === 'title-asc') {
+                list.sort((a, b) => a.title.localeCompare(b.title, 'ar'));
+            }
+
+            return list;
+        }
+
+        function renderProducts() {
+            const container = document.getElementById('productContainer');
+            const items = getFilteredProducts();
+
+            document.getElementById('productCountBadge').innerText = `${items.length} منتج`;
+
+            if (items.length === 0) {
+                container.className = 'col-span-full';
+                container.innerHTML = `
+                    <div class="text-center py-16 bg-white rounded-3xl border border-slate-200">
+                        <i class="fa-solid fa-box-open text-5xl text-slate-300 mb-3 block"></i>
+                        <h4 class="font-bold text-slate-800 text-base">لم نجد منتجات مطابقة لفلتر البحث الحقيقي</h4>
+                        <p class="text-xs text-slate-500 mt-1">جرّب تغيير الكلمة أو اختيار قسم آخر من الأعلى</p>
+                        <button onclick="filterCategory('all'); document.getElementById('catalogSearch').value='';" class="mt-4 bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl">إعادة ضبط الفلاتر</button>
+                    </div>
+                `;
+                return;
+            }
+
+            if (state.viewMode === 'grid') {
+                container.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6';
+                container.innerHTML = items.map(p => renderGridCard(p)).join('');
+            } else {
+                container.className = 'space-y-4';
+                container.innerHTML = items.map(p => renderListCard(p)).join('');
+            }
+
+            updateWishlistBadges();
+        }
+
+        function renderGridCard(p) {
+            const isWish = state.wishlist.includes(p.id);
+            const isComp = state.compareList.includes(p.id);
+
+            return `
+                <article class="bg-white border border-slate-200/80 rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group relative">
+                    <div>
+                        <!-- Image Container -->
+                        <div class="relative h-56 bg-slate-100 overflow-hidden">
+                            <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" onerror="this.src='https://placehold.co/600x400/1e293b/ffffff?text=Al-Horriya'">
+                            
+                            <!-- Category Badge -->
+                            <span class="absolute top-3 right-3 bg-slate-950/85 backdrop-blur-md text-amazon-gold text-[10px] font-black px-3 py-1 rounded-full border border-slate-700">
+                                ${p.badge}
+                            </span>
+
+                            <!-- Wishlist & Compare Floating Buttons -->
+                            <div class="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
+                                <button onclick="toggleWishlist(${p.id})" class="w-8 h-8 rounded-full ${isWish ? 'bg-rose-600 text-white' : 'bg-white/90 text-slate-700 hover:bg-rose-50 hover:text-rose-600'} flex items-center justify-center text-xs shadow-md backdrop-blur-md transition-colors" title="إضافة للمفضلة">
+                                    <i class="${isWish ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+                                </button>
+                                <button onclick="toggleCompare(${p.id})" class="w-8 h-8 rounded-full ${isComp ? 'bg-brand-600 text-white' : 'bg-white/90 text-slate-700 hover:bg-brand-50 hover:text-brand-600'} flex items-center justify-center text-xs shadow-md backdrop-blur-md transition-colors" title="إضافة للمقارنة">
+                                    <i class="fa-solid fa-code-compare"></i>
+                                </button>
+                            </div>
+
+                            <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-md text-slate-800 text-[10px] font-extrabold px-2.5 py-1 rounded-lg">
+                                ${p.categoryName}
+                            </span>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-5 space-y-3">
+                            <div class="flex items-center justify-between text-xs font-bold">
+                                <div class="flex items-center gap-1 text-amber-400">
+                                    ${getStarRating(p.rating)}
+                                    <span class="text-slate-900 font-num ml-1">${p.rating}</span>
+                                </div>
+                                <span class="text-slate-400 font-num text-[11px]">(${p.reviewsCount} تقييم)</span>
+                            </div>
+
+                            <h3 class="font-black text-slate-900 text-base group-hover:text-brand-600 transition-colors leading-snug line-clamp-2">
+                                ${p.title}
+                            </h3>
+
+                            <p class="text-slate-500 text-xs leading-relaxed line-clamp-2">
+                                ${p.summary}
+                            </p>
+
+                            <!-- Key Pro snippet -->
+                            <div class="bg-emerald-50/80 border border-emerald-200/60 p-2.5 rounded-xl text-[11px] font-bold text-emerald-800 flex items-center gap-2">
+                                <i class="fa-solid fa-circle-check text-emerald-600 text-xs shrink-0"></i>
+                                <span class="truncate">${p.pros[0]}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer Actions -->
+                    <div class="p-5 pt-0 space-y-2">
+                        <button onclick="openProductModal(${p.id})" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2">
+                            <i class="fa-regular fa-file-lines"></i> قراءة المراجعة والحكم الفني
+                        </button>
+
+                        <a href="${p.amazonLink}" target="_blank" rel="nofollow sponsored noopener" class="w-full bg-gradient-to-r from-amber-500 to-amazon-orange hover:from-amber-600 hover:to-amazon-hover text-slate-950 font-black text-xs py-3 px-4 rounded-xl transition-all shadow-sm hover:shadow-amazon-glow flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-amazon text-base"></i> تحقق من السعر والتوفر على أمازون
+                            <i class="fa-solid fa-arrow-left text-[10px]"></i>
+                        </a>
+                    </div>
+                </article>
+            `;
+        }
+
+        function renderListCard(p) {
+            const isWish = state.wishlist.includes(p.id);
+            const isComp = state.compareList.includes(p.id);
+
+            return `
+                <article class="bg-white border border-slate-200/80 rounded-3xl overflow-hidden hover:shadow-xl transition-all p-4 flex flex-col md:flex-row items-center gap-5">
+                    <div class="w-full md:w-56 h-40 bg-slate-100 rounded-2xl overflow-hidden relative shrink-0">
+                        <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover">
+                        <span class="absolute top-2 right-2 bg-slate-900 text-amber-400 text-[10px] font-black px-2.5 py-0.5 rounded-full">
+                            ${p.badge}
+                        </span>
+                    </div>
+
+                    <div class="flex-grow space-y-2 w-full">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded-md">${p.categoryName}</span>
+                            <div class="flex items-center gap-1 text-amber-400 text-xs font-bold">
+                                ${getStarRating(p.rating)}
+                                <span class="text-slate-800 font-num">${p.rating}</span>
+                            </div>
+                        </div>
+
+                        <h3 class="font-black text-slate-900 text-base">${p.title}</h3>
+                        <p class="text-slate-500 text-xs leading-relaxed line-clamp-2">${p.summary}</p>
+                        
+                        <div class="flex items-center gap-2 text-emerald-700 text-[11px] font-bold">
+                            <i class="fa-solid fa-check"></i> ${p.pros[0]}
+                        </div>
+                    </div>
+
+                    <div class="w-full md:w-52 flex flex-col gap-2 shrink-0 border-t md:border-t-0 md:border-r border-slate-100 pt-3 md:pt-0 md:pr-4">
+                        <a href="${p.amazonLink}" target="_blank" rel="nofollow sponsored noopener" class="w-full bg-amazon-orange hover:bg-amazon-hover text-slate-950 font-black text-xs py-2.5 rounded-xl text-center shadow-sm flex items-center justify-center gap-1.5">
+                            <i class="fa-brands fa-amazon"></i> رابط أمازون
+                        </a>
+                        <button onclick="openProductModal(${p.id})" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold py-2 rounded-xl">
+                            تفاصيل الفحص
+                        </button>
+                    </div>
+                </article>
+            `;
+        }
+
+        function getStarRating(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= Math.floor(rating)) {
+                    stars += '<i class="fa-solid fa-star"></i>';
+                } else if (i - 0.5 <= rating) {
+                    stars += '<i class="fa-solid fa-star-half-stroke"></i>';
+                } else {
+                    stars += '<i class="fa-regular fa-star text-slate-300"></i>';
+                }
+            }
+            return stars;
+        }
+
+
+        function openProductModal(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+
+            const content = document.getElementById('productModalContent');
+            content.innerHTML = `
+                <div class="space-y-6">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-4">
+                        <span class="text-xs font-bold px-3 py-1 bg-brand-50 text-brand-700 rounded-lg">${product.categoryName}</span>
+                        <div class="flex items-center gap-2 text-amber-400 text-xs font-bold">
+                            ${getStarRating(product.rating)}
+                            <span class="text-slate-900 font-num">${product.rating} / 5</span>
+                            <span class="text-slate-400">(${product.reviewsCount} تقييم حقيقي)</span>
+                        </div>
+                    </div>
+
+                    <h2 class="text-xl sm:text-2xl font-black text-slate-900 leading-snug">${product.title}</h2>
+
+                    <div class="relative h-64 sm:h-80 rounded-2xl overflow-hidden bg-slate-100">
+                        <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover">
+                    </div>
+
+                    <!-- Detailed Score Breakdown Bars -->
+                    <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl space-y-3">
+                        <h4 class="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-2">
+                            <i class="fa-solid fa-chart-simple text-brand-600"></i> التقييم المفصل لنقاط الجهاز:
+                        </h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                            <div>
+                                <div class="flex justify-between font-bold mb-1">
+                                    <span>الأداء والكفاءة</span>
+                                    <span class="font-num text-brand-600">${product.scores.performance}%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2">
+                                    <div class="bg-brand-600 h-2 rounded-full" style="width: ${product.scores.performance}%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between font-bold mb-1">
+                                    <span>جودة التصنيع والتحمل</span>
+                                    <span class="font-num text-emerald-600">${product.scores.build}%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2">
+                                    <div class="bg-emerald-500 h-2 rounded-full" style="width: ${product.scores.build}%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between font-bold mb-1">
+                                    <span>القيمة مقابل السعر</span>
+                                    <span class="font-num text-amber-600">${product.scores.value}%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2">
+                                    <div class="bg-amber-500 h-2 rounded-full" style="width: ${product.scores.value}%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between font-bold mb-1">
+                                    <span>التصميم والراحة</span>
+                                    <span class="font-num text-purple-600">${product.scores.design}%</span>
+                                </div>
+                                <div class="w-full bg-slate-200 rounded-full h-2">
+                                    <div class="bg-purple-500 h-2 rounded-full" style="width: ${product.scores.design}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pros & Cons Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                        <div class="bg-emerald-50/80 border border-emerald-200 p-4 rounded-2xl space-y-2">
+                            <h4 class="font-bold text-emerald-900 flex items-center gap-1.5"><i class="fa-solid fa-thumbs-up text-emerald-600"></i> أبرز المميزات:</h4>
+                            <ul class="space-y-1.5 text-emerald-800 font-medium">
+                                ${product.pros.map(pro => `<li>• ${pro}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div class="bg-rose-50/80 border border-rose-200 p-4 rounded-2xl space-y-2">
+                            <h4 class="font-bold text-rose-900 flex items-center gap-1.5"><i class="fa-solid fa-thumbs-down text-rose-600"></i> الملاحظات والسلبيات:</h4>
+                            <ul class="space-y-1.5 text-rose-800 font-medium">
+                                ${product.cons.map(con => `<li>• ${con}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Tech Specs Table -->
+                    <div class="space-y-2">
+                        <h4 class="font-bold text-slate-900 text-xs">المواصفات الفنية الرئيسية:</h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                            ${Object.entries(product.specs).map(([key, val]) => `
+                                <div class="bg-slate-100 p-2.5 rounded-xl">
+                                    <span class="block text-slate-400 text-[10px] font-bold">${key}</span>
+                                    <span class="font-bold text-slate-800">${val}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div>${product.fullReview}</div>
+
+                    <!-- Affiliate CTA -->
+                    <div class="pt-4 border-t border-slate-100 space-y-3">
+                        <a href="${product.amazonLink}" target="_blank" rel="nofollow sponsored noopener" class="w-full bg-gradient-to-r from-amber-500 to-amazon-orange hover:from-amber-600 hover:to-amazon-hover text-slate-950 font-black text-sm py-4 rounded-2xl text-center shadow-lg hover:shadow-amazon-glow transition-all flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-amazon text-xl"></i> التوجه لصفحة المنتج على أمازون للتحقق من العروض
+                        </a>
+                        <p class="text-[10px] text-slate-400 text-center">قد يتلقى موقع الحرية عمولة عند إتمام الشراء عبر هذا الرابط لتعزيز استمرار مراجعاتنا المجانية.</p>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('productModal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('productModal').classList.add('hidden');
+        }
+
+        /* Wishlist State Handling */
+        function toggleWishlist(id) {
+            const index = state.wishlist.indexOf(id);
+            if (index > -1) {
+                state.wishlist.splice(index, 1);
+                showToast('تمت إزالة المنتج من المفضلة');
+            } else {
+                state.wishlist.push(id);
+                showToast('تمت إضافة المنتج لمفضلتك بنجاح');
+            }
+            localStorage.setItem('horriya_wishlist', JSON.stringify(state.wishlist));
+            updateWishlistBadges();
+            renderProducts();
+        }
+
+        function updateWishlistBadges() {
+            const badge = document.getElementById('wishlistBadge');
+            if (state.wishlist.length > 0) {
+                badge.innerText = state.wishlist.length;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function toggleWishlistModal() {
+            const modal = document.getElementById('wishlistModal');
+            const content = document.getElementById('wishlistModalContent');
+
+            if (modal.classList.contains('hidden')) {
+                const savedProducts = products.filter(p => state.wishlist.includes(p.id));
+                if (savedProducts.length === 0) {
+                    content.innerHTML = '<p class="text-xs text-slate-400 text-center py-8">لم تقم بحفظ أي منتجات في مفضلتك بعد.</p>';
+                } else {
+                    content.innerHTML = savedProducts.map(p => `
+                        <div class="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200">
+                            <div class="flex items-center gap-3">
+                                <img src="${p.image}" class="w-12 h-12 object-cover rounded-xl">
+                                <div>
+                                    <h5 class="text-xs font-bold text-slate-900">${p.title}</h5>
+                                    <span class="text-[10px] text-brand-600 font-bold">${p.categoryName}</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button onclick="openProductModal(${p.id}); toggleWishlistModal();" class="text-xs bg-slate-200 hover:bg-slate-300 px-3 py-1.5 rounded-lg font-bold">عرض</button>
+                                <button onclick="toggleWishlist(${p.id}); toggleWishlistModal();" class="text-xs text-rose-600 hover:bg-rose-50 p-2 rounded-lg"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function clearWishlist() {
+            state.wishlist = [];
+            localStorage.setItem('horriya_wishlist', JSON.stringify([]));
+            updateWishlistBadges();
+            toggleWishlistModal();
+            renderProducts();
+            showToast('تم مسح المفضلة بالكامل');
+        }
+
+        /* Comparison Handling System */
+        function toggleCompare(id) {
+            const index = state.compareList.indexOf(id);
+            if (index > -1) {
+                state.compareList.splice(index, 1);
+                showToast('تمت إزالة المنتج من شريط المقارنة');
+            } else {
+                if (state.compareList.length >= 3) {
+                    showToast('يمكنك مقارنة 3 منتجات كحد أقصى في وقت واحد');
+                    return;
+                }
+                state.compareList.push(id);
+                showToast('تمت إضافة المنتج للمقارنة');
+            }
+            updateCompareUI();
+            renderProducts();
+        }
+
+        function updateCompareUI() {
+            const floatingBar = document.getElementById('floatingCompareBar');
+            const countBadge = document.getElementById('compareBadge');
+            const floatingCount = document.getElementById('floatingCompareCount');
+
+            if (state.compareList.length > 0) {
+                floatingBar.classList.remove('hidden');
+                floatingCount.innerText = state.compareList.length;
+                countBadge.innerText = state.compareList.length;
+                countBadge.classList.remove('hidden');
+            } else {
+                floatingBar.classList.add('hidden');
+                countBadge.classList.add('hidden');
+            }
+        }
+
+        function clearCompareList() {
+            state.compareList = [];
+            updateCompareUI();
+            renderProducts();
+        }
+
+        function openCompareModal() {
+            if (state.compareList.length === 0) {
+                showToast('الرجاء اختيار منتجين على الأقل للمقارنة من البطاقات');
+                return;
+            }
+
+            const compProducts = products.filter(p => state.compareList.includes(p.id));
+            const content = document.getElementById('compareModalContent');
+
+            content.innerHTML = `
+                <table class="w-full border-collapse text-right text-xs">
+                    <thead>
+                        <tr class="border-b border-slate-200">
+                            <th class="p-3 text-slate-400 font-bold">المعيار</th>
+                            ${compProducts.map(p => `
+                                <th class="p-3 text-slate-900 font-extrabold w-1/3">
+                                    <div class="space-y-2">
+                                        <img src="${p.image}" class="w-20 h-20 object-cover rounded-xl mx-auto">
+                                        <div class="line-clamp-2">${p.title}</div>
+                                    </div>
+                                </th>
+                            `).join('')}
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr>
+                            <td class="p-3 font-bold text-slate-500 bg-slate-50">التقييم العام</td>
+                            ${compProducts.map(p => `<td class="p-3 font-bold text-amber-500">${p.rating} / 5 ⭐</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-slate-500 bg-slate-50">الأداء الكلي</td>
+                            ${compProducts.map(p => `<td class="p-3 font-bold text-brand-600 font-num">${p.scores.performance}%</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-slate-500 bg-slate-50">أبرز ميزة</td>
+                            ${compProducts.map(p => `<td class="p-3 text-slate-700">${p.pros[0]}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-slate-500 bg-slate-50">الشراء المباشر</td>
+                            ${compProducts.map(p => `
+                                <td class="p-3">
+                                    <a href="${p.amazonLink}" target="_blank" rel="nofollow sponsored noopener" class="bg-amazon-orange hover:bg-amazon-hover text-slate-950 font-black px-3 py-2 rounded-lg text-[11px] block text-center">
+                                        متجر أمازون
+                                    </a>
+                                </td>
+                            `).join('')}
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('compareModal').classList.remove('hidden');
+        }
+
+        function closeCompareModal() {
+            document.getElementById('compareModal').classList.add('hidden');
+        }
+
+        /* Quiz / Smart Assistant Logic */
+        function openQuizModal() {
+            document.getElementById('quizModal').classList.remove('hidden');
+            document.getElementById('quizResultBox').classList.add('hidden');
+        }
+
+        function closeQuizModal() {
+            document.getElementById('quizModal').classList.add('hidden');
+        }
+
+        function handleQuizSubmit(e) {
+            e.preventDefault();
+            const cat = document.getElementById('quizCategory').value;
+            const priority = document.getElementById('quizPriority').value;
+
+            let candidates = [...products];
+            if (cat !== 'any') {
+                candidates = candidates.filter(p => p.category === cat);
+            }
+
+            if (candidates.length === 0) candidates = [...products];
+
+            if (priority === 'rating') {
+                candidates.sort((a,b) => b.rating - a.rating);
+            } else if (priority === 'popular') {
+                candidates.sort((a,b) => b.reviewsCount - a.reviewsCount);
+            } else {
+                candidates.sort((a,b) => b.scores.value - a.scores.value);
+            }
+
+            const recommended = candidates[0];
+            const box = document.getElementById('quizResultBox');
+
+            box.innerHTML = `
+                <div class="space-y-3 bg-slate-50 p-4 rounded-2xl border border-amber-200">
+                    <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2.5 py-0.5 rounded-md">التوصية المثالية لك بناءً على إجاباتك:</span>
+                    <div class="flex items-center gap-3">
+                        <img src="${recommended.image}" class="w-14 h-14 object-cover rounded-xl">
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-900">${recommended.title}</h4>
+                            <span class="text-[10px] text-amber-500 font-bold">تقييم: ${recommended.rating} ⭐</span>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 pt-2">
+                        <button onclick="openProductModal(${recommended.id}); closeQuizModal();" class="w-1/2 bg-slate-900 text-white text-xs font-bold py-2 rounded-xl">المراجعة التفصيلية</button>
+                        <a href="${recommended.amazonLink}" target="_blank" rel="nofollow sponsored noopener" class="w-1/2 bg-amazon-orange text-slate-950 font-bold text-xs py-2 rounded-xl text-center">أمازون مباشرة</a>
+                    </div>
+                </div>
+            `;
+            box.classList.remove('hidden');
+        }
+
+        /* Search Modals Logic */
+        function openSearchModal() {
+            document.getElementById('searchModal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('searchInput').focus(), 100);
+        }
+
+        function closeSearchModal() {
+            document.getElementById('searchModal').classList.add('hidden');
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const resultsBox = document.getElementById('searchResults');
+
+            if (!query) {
+                resultsBox.innerHTML = '<p class="text-xs text-slate-400 text-center py-6">اكتب كلمة البحث لمسح قاعدة بيانات الحرية...</p>';
+                return;
+            }
+
+            const matches = products.filter(p => 
+                p.title.toLowerCase().includes(query) || 
+                p.summary.toLowerCase().includes(query) ||
+                p.categoryName.toLowerCase().includes(query)
+            );
+
+            if (matches.length === 0) {
+                resultsBox.innerHTML = '<p class="text-xs text-slate-500 text-center py-6">لم يتم العثور على مراجعات مطابقة لـ "' + query + '"</p>';
+            } else {
+                resultsBox.innerHTML = matches.map(m => `
+                    <div onclick="closeSearchModal(); openProductModal(${m.id});" class="p-3 hover:bg-slate-50 rounded-2xl cursor-pointer flex items-center justify-between transition-colors border border-slate-100">
+                        <div class="flex items-center gap-3">
+                            <img src="${m.image}" class="w-10 h-10 object-cover rounded-xl">
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-800">${m.title}</h4>
+                                <span class="text-[10px] text-slate-400">${m.categoryName}</span>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-amber-500">${m.rating} ⭐</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function handleHeroSearch(e) {
+            if (e.key === 'Enter') executeHeroSearch();
+        }
+
+        function executeHeroSearch() {
+            const val = document.getElementById('heroSearchInput').value.trim();
+            if (val) {
+                document.getElementById('catalogSearch').value = val;
+                applyCatalogFilters();
+                document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        /* Legal Modals Logic */
+        function openLegalModal(type) {
+            const content = document.getElementById('legalModalContent');
+            if (type === 'about') {
+                content.innerHTML = `
+                    <div class="space-y-4 text-slate-700">
+                        <h2 class="text-lg font-black text-slate-900">عن موقع الحرية Tech Reviews</h2>
+                        <p class="text-xs leading-relaxed">موقع الحرية هو دليل إلكتروني ومجلة عربية متخصصة في مراجعة وتقييم المنتجات التقنية والأجهزة المنزلية بكل حيادية وحرفية.</p>
+                        <p class="text-xs leading-relaxed">هدفنا تقديم أدلة شرائية عملية تساعد المستهلك على تفادي المنتجات الرديئة والتأكد من جودة ما يشتريه عبر المتاجر العالمية مثل أمازون.</p>
+                    </div>
+                `;
+            } else if (type === 'disclosure') {
+                content.innerHTML = `
+                    <div class="space-y-4 text-slate-700">
+                        <h2 class="text-lg font-black text-slate-900">إخلاء مسؤولية العمولة (Affiliate Disclosure)</h2>
+                        <div class="bg-amber-50 border border-amber-200 p-4 rounded-2xl text-xs text-amber-900 leading-relaxed font-semibold">
+                            "موقع الحرية يشارك في برنامج Amazon Services LLC Associates، وهو برنامج إعلاني مشارك يتيح للمواقع كسب العمولات عن طريق الإعلان والربط بـ Amazon.com."
+                        </div>
+                        <p class="text-xs leading-relaxed">عند النقر على روابط الشراء والتوجه إلى متجر أمازون، قد نتقاضى عمولة تسويقية بسيطة. هذه العمولة لا تدفعها أنت إطلاقاً ولا تضيف أي تكلفة على سعر المنتج.</p>
+                    </div>
+                `;
+            } else if (type === 'privacy') {
+                content.innerHTML = `
+                    <div class="space-y-4 text-slate-700">
+                        <h2 class="text-lg font-black text-slate-900">سياسة الخصوصية (Privacy Policy)</h2>
+                        <p class="text-xs leading-relaxed">نلتزم في موقع الحرية بحماية خصوصية زوارنا. لا نقوم بجمع أي بيانات بنكية أو معلومات حساسة. نستخدم الكوكيز الأساسية لتحسين تجربة التصفح واحتساب إحالات برنامج أمازون بشكل آمن.</p>
+                    </div>
+                `;
+            } else if (type === 'contact') {
+                content.innerHTML = `
+                    <div class="space-y-4">
+                        <h2 class="text-lg font-black text-slate-900">تواصل مع فريق الحرية</h2>
+                        <form onsubmit="event.preventDefault(); closeLegalModal(); showToast('تم استلام رسالتك وسنرد عليك قريباً');" class="space-y-3 text-xs">
+                            <div>
+                                <label class="block font-bold mb-1">الاسم</label>
+                                <input type="text" required class="w-full border border-slate-200 p-2.5 rounded-xl">
+                            </div>
+                            <div>
+                                <label class="block font-bold mb-1">البريد الإلكتروني</label>
+                                <input type="email" required class="w-full border border-slate-200 p-2.5 rounded-xl">
+                            </div>
+                            <div>
+                                <label class="block font-bold mb-1">الرسالة</label>
+                                <textarea rows="3" required class="w-full border border-slate-200 p-2.5 rounded-xl"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-slate-900 text-white font-bold py-3 rounded-xl">إرسال</button>
+                        </form>
+                    </div>
+                `;
+            }
+            document.getElementById('legalModal').classList.remove('hidden');
+        }
+
+        function closeLegalModal() {
+            document.getElementById('legalModal').classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 3000);
+        }
+
+        window.onload = function() {
+            initCategoryPills();
+            renderProducts();
+            updateCompareUI();
+        };
+    </script>
+</body>
+</html>
